@@ -17,7 +17,7 @@ Our [Style Guide](https://github.com/FlyingJalapeno/Objective-C-Style-Guide) con
 Below are some general principles to guide you when architecting your code. 
 
 ### Always use the highest abstraction possible
-When choosing a technology for implementing behavior, always choose the highest level abstraction that meets your needs. This keeps you from introducing unneeded complexity too soon in your application (YAGNI / Pre-optimization)
+When choosing a technology for implementing behavior, always choose the highest level abstraction that meets your needs. This keeps you from introducing unneeded complexity too soon in your application (YAGNI / Pre-optimization).
 
 Some examples:
 AVPlayer vc RemoteIO
@@ -66,15 +66,16 @@ NSOperations (or something like BFTask in [Bolts](https://github.com/BoltsFramew
 These types of classes provide structure to your business rules and workflows and encapsulate that behavior into a concrete object while providing a standard API for progress, cancelation, and errors.
 
 ### Global Access
+In general global access should be avoided when possible. Sometimes it appropriate - one example is a user session which may be needed by many classes in an app. It can be overkill to pass this as a initializer parameter in every class, so this is a good candidate for global access.
 
+#### Singletons
+The most common way to provide global access. Singletons should be used sparingly. Refrain from having any view controller or view singletons - most of the time you can scope the behavior to specific class or a category (add a UIViewController category). Many times a singleton sees like a good idea, but eventually you may need "2" of that object - and many assumptions your code made will be wrong. Singletons also make unit testing much harder.
 
-### Singletons
-Singletons should be used sparingly. Refrain from having any view controller or view singletons - most of the time you can 
+#### App Delegate
+It is common for people to use the App Delegate as a singleton - which in turn leads to the app delegate containing and externalizing objects that are not its responsibility. Many times people do this to get a reference to the entry point of the view(controller) hierarchy - try creating a purpose built object for this instead.
 
-
-
-### App Delegate
-
+#### NSObject Categories
+Adding categories to NSObject usually is a bad idea - since almost everything is an NSObject. Try to better scope your code.
 
 ## Object Collaboration
 ### Types of communication
