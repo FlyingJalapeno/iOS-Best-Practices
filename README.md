@@ -99,7 +99,7 @@ Posting a notification before/after task, useful for notifying multiple objects.
 #### KVO 
 Fine grained notifications at a property level. This is the most verbose and error prone of the techniques, and in general should be avoided if possible. If it must be used, look into a more resilient 3rd party wrapper like [MAKVONotificationCenter](https://github.com/mikeash/MAKVONotificationCenter) or [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa).
 
-### Communication Situations
+### Communication Strategies
 Based on the types of objects involved, below is a list of appropriate ways to communicate: 
 
 #### Views
